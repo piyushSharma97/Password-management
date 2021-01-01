@@ -67,7 +67,7 @@ router.get('/', checkLoginUser,function(req, res, next) {
     var passdelete=passCatModel.findByIdAndDelete(passcat_id);
     passdelete.exec(function(err){
       if(err) throw err;
-      res.redirect('/passwordCategory');
+      res.redirect('/password_category');
     });
   });
   
@@ -91,7 +91,7 @@ router.get('/', checkLoginUser,function(req, res, next) {
    update_passCat.exec(function(err,doc){
       if(err) throw err;
    
-  res.redirect('/passwordCategory');
+  res.redirect('/password_category');
     });
   });
   
