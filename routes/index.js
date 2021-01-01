@@ -89,7 +89,7 @@ if(bcrypt.compareSync(password,getPassword)){
  
 });
 
-
+// register new user
 router.get('/signup', function(req, res, next) {
   var loginUser=localStorage.getItem('loginUser');
   if(loginUser){
