@@ -66,23 +66,24 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var username=req.body.uname;
   var password=req.body.password;
+
   var checkUser=userModule.findOne({username:username});
   checkUser.exec((err, data)=>{
    if(data==null){
     res.render('index', { title: 'Password Management System', msg:"Invalid Username and Password." });
-
-   }else{
-if(err) throw err;
-var getUserID=data._id;
-var getPassword=data.password;
-if(bcrypt.compareSync(password,getPassword)){
-  var token = jwt.sign({ userID: getUserID }, 'loginToken');
-  localStorage.setItem('userToken', token);
-  localStorage.setItem('loginUser', username);
-  res.redirect('/dashboard');
-}else{
+   }
+   else{
+    if(err) throw err;
+    var getUserID=data._id;
+    var getPassword=data.password;
+      if(bcrypt.compareSync(password,getPassword)){
+        var token = jwt.sign({ userID: getUserID }, 'loginToken');
+        localStorage.setItem('userToken', token);
+        localStorage.setItem('loginUser', username);
+        res.redirect('/dashboard');
+      }
+else{
   res.render('index', { title: 'Password Management System', msg:"Invalid Username and Password." });
-
 }
    }
   });
